@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement - 2 Algorithms </title>
+</head>
+<body>
+    <h2>Question 2:--
+    Given a string str, your task is to write a program which <br>
+    takes a string str as its only input and returns an integer<br>
+    denoting the no of palindromic subsequence (need not necessarily<br> 
+    be distinct) which could be formed from the string str.</h2>
+    <br/>
+
+    <h1>Answer</h1>
+</body>
+<script>
+    function palindromicSubsequence(s){
+        var count = 0;
+        for (var i = 0; i < s.length; i++) {
+            for (var j = i; j < s.length; j++) {
+                var str = s.slice(i, j + 1);
+                if (str == str.split('').reverse().join('')) {
+                    count++;
+                }
+            }
+        }
+        document.write(count);
+    }
+    palindromicSubsequence("abcdef");
+</script>
+</html>

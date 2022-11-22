@@ -1,0 +1,91 @@
+2- Write a SQL statement to create the duplicate of the countries table named country_new with all structure and data.
+
+Here in the following is the structure of the table countries.
+
+
+mysql> CREATE DATABASE countries2;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+          
+| countries2         |
+| information_schema |
+| mysql              |
+| performance_schema |              
+| sys                |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> use countries2;
+Database changed
+mysql> CREATE TABLE countries2(
+    -> country_ID int,
+    -> country_Name varchar(255),
+    -> CHECK(country_Name IN('Italy','India','China')),
+    -> region_ID int
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> DESC countries2;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| country_ID   | int          | YES  |     | NULL    |       |
+| country_Name | varchar(255) | YES  |     | NULL    |       |
+| region_ID    | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> INSERT INTO countries2(country_ID,country_Name,region_ID)
+    -> VALUES(001,'India',01),
+    -> (002,'Italy',02),
+    -> (003,'China',03);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM countries2;
+   
++-------------+--------------+-----------+
+| country_ID  | country_Name | region_ID |
++-------------+--------------+-----------+
+|         001 | India        |        01 |
+|         002 | Italy        |        02 |
+|         003 | China        |        03 |
++------------+--------------+------------+
+3 rows in set (0.00 sec)
+
+
+
+
+******************** duplicate table ******************
+
+
+mysql> create table country_new like countries2;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_countries2 |
++----------------------+
+| countries2           |
+| country_new          |
++----------------------+
+2 rows in set (0.01 sec)
+
+mysql> insert country_new select * from countries2;
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from country_new;
++------------+--------------+-----------+
+| country_ID | country_Name | region_ID |
++------------+--------------+-----------+
+|          1 | India        |         1 |
+|          2 | Italy        |         2 |
+|          3 | China        |         3 ||
++------------+--------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql>

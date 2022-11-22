@@ -1,0 +1,78 @@
+1- Write a SQL statement to create a table named countries including
+  columns country_id, country_name and region_id and make sure that 
+  no countries except Italy, India and China will be entered in the table.
+
+
+
+
+mysql> CREATE DATABASE countries2;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+          
+| countries2         |
+| information_schema |
+| mysql              |
+| performance_schema |              
+| sys                |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> use countries2;
+Database changed
+mysql> CREATE TABLE countries2(
+    -> country_ID int,
+    -> country_Name varchar(255),
+    -> CHECK(country_Name IN('Italy','India','China')),
+    -> region_ID int
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> DESC countries2;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| country_ID   | int          | YES  |     | NULL    |       |
+| country_Name | varchar(255) | YES  |     | NULL    |       |
+| region_ID    | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> INSERT INTO countries2(country_ID,country_Name,region_ID)
+    -> VALUES(001,'India',01),
+    -> (002,'Italy',02),
+    -> (003,'China',03);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM countries2;
+   
++-------------+--------------+-----------+
+| country_ID  | country_Name | region_ID |
++-------------+--------------+-----------+
+|         001 | India        |        01 |
+|         002 | Italy        |        02 |
+|         003 | China        |        03 |
++------------+--------------+------------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
